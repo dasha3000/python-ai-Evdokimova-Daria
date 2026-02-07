@@ -1,0 +1,9 @@
+# Распределение памятников по стилям в разных странах
+SELECT ?country ?countryLabel ?style ?styleLabel (COUNT(DISTINCT ?monument) AS ?count) (GROUP_CONCAT(DISTINCT ?monumentLabel; separator="; ") AS ?monuments) WHERE {
+  ?monument wdt:P31/wdt:P279* wd:Q4989906;  # Памятник или его подклассы
+            wdt:P17 ?country;               # Страна
+            wdt:P135 ?style.                # Стиль
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,en". }
+}
+GROUP BY ?country ?countryLabel ?style ?styleLabel
+ORDER BY DESC(?count) ?countryLabel ?styleLabel
