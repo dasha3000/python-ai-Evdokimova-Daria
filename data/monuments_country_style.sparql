@@ -4,5 +4,5 @@ SELECT ?monument ?monumentLabel ?countryLabel ?styleLabel WHERE {
   ?monument wdt:P31/wdt:P279* wd:Q4989906;  # Памятник или его подклассы
             wdt:P17 ?country;               # Страна
             wdt:P135 ?style.                # Стиль
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,en,mul". }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,en,mul,pl,fr,ca,cs,de,it,es,ro,da,nl". }
 }
