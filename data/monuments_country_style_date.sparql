@@ -6,13 +6,16 @@ SELECT
   ?styleLabel
   ?inceptionYear
 WHERE {
-  ?monument wdt:P31/wdt:P279* wd:Q4989906 ;  # экземпляр: памятник или подкласс
-            wdt:P17 ?country ;                # страна
-            wdt:P135 ?style .                 # стиль — обязательное поле
+  # экземпляр: памятник или подкласс
+  ?monument wdt:P31/wdt:P279* wd:Q4989906 ;
+            wdt:P17 ?country ;
+            # стиль — обязательное поле
+            wdt:P135 ?style .
   OPTIONAL {
-    ?monument wdt:P571 ?inceptionDate .       # дата создания/открытия
-    BIND(YEAR(?inceptionDate) AS ?inceptionYear)  # только год, без полной даты
+    ?monument wdt:P571 ?inceptionDate .
+    # только год, без полной даты
+    BIND(YEAR(?inceptionDate) AS ?inceptionYear)
   }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,en,mul" . }
 }
-ORDER BY ?inceptionYear ?countryLabe
+ORDER BY ?inceptionYear ?countryLabel
