@@ -1,0 +1,18 @@
+# Памятники: страна, художественный стиль, год создания (P571)
+# Monuments: country, artistic style, inception year (P571)
+SELECT
+  ?monument ?monumentLabel
+  ?countryLabel
+  ?styleLabel
+  ?inceptionYear
+WHERE {
+  ?monument wdt:P31/wdt:P279* wd:Q4989906 ;  # экземпляр: памятник или подкласс
+            wdt:P17 ?country ;                # страна
+            wdt:P135 ?style .                 # стиль — обязательное поле
+  OPTIONAL {
+    ?monument wdt:P571 ?inceptionDate .       # дата создания/открытия
+    BIND(YEAR(?inceptionDate) AS ?inceptionYear)  # только год, без полной даты
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,en,mul" . }
+}
+ORDER BY ?inceptionYear ?countryLabe
